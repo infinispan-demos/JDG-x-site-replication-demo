@@ -4,7 +4,7 @@ install-templates:
 .PHONY: install-templates
 
 clear:
-	oc delete all,secrets,sa,templates,configmaps,daemonsets,clusterroles,rolebindings,serviceaccounts --selector=template=jdg || true
+	oc delete all,secrets,sa,templates,configmaps,daemonsets,clusterroles,rolebindings,serviceaccounts,pvc,pv --selector=template=jdg || true
 .PHONY: clear
 
 test:
