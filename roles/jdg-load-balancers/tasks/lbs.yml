@@ -1,0 +1,26 @@
+---
+
+- name: Log into proper cluster
+  shell: oc login https://{{openshift_host}}:8443 --token={{openshift_token}} --insecure-skip-tls-verify=true
+
+- name: Create stage project
+  shell: oc new-project {{jdg_project}}
+  ignore_errors: yes
+
+- name: Delete x-site replication service if it exists
+  shell: oc delete svc/jdg-app-x-site
+  ignore_errors: yes
+
+- name: Create x-site replication service
+  shell: echo '{{ item }}' | oc create -f -
+  with_file:
+    - "x-site-service.json"
+
+- name: Wait for x-site service external IP
+  shell: |
+    OPEN_CURLY="{"
+    external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.ip}}$OPEN_CURLY{end}}")
+    while [ -z $external_ip ]; do
+      sleep 10
+      external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.ip}}$OPEN_CURLY{end}}")
+    done

@@ -1,0 +1,31 @@
+= JDG as a Service
+
+This very short demo installs JDG with cross site replication in
+ 3 different clusters (or just namespaces):
+
+```
+Stage
+  +-- Stage Namespace --+
+AWS                     |
+  +-- AWS Namespace     + Replication
+Azure                   |
+  +-- Azure Namespace --+
+```
+
+All three clusters work in active-active-active replication so please be aware that:
+
+* You should not write into the same key from different namespaces or clouds
+* Replication is Async, so it may take same time
+
+== How to run it?
+
+* Have a look at `group_vars/clouds` file and edit server addresses and tokens.
+**  It is absolutely fine to use `oc cluster up`. Just use 3 different namespaces there.
+** The user needs to be able to create a Load Balancer Services.
+* Once you edited the file, just execute `./run.sh`.
+
+== Next steps
+
+* [ ] Add some more granularity to the playbooks
+* [ ] Always login to different clusters the same way
+* [ ] Prepare living installation

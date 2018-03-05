@@ -1,0 +1,8 @@
+---
+- hosts: clouds
+  connection: local
+  gather_facts: no
+
+  roles:
+    - jdg-load-balancers
+    - jdg-templates
