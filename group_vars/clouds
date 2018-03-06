@@ -1,11 +1,11 @@
-stage_openshift_token: J5tSoXXl6c_4n5jHg__H_JzitlC-horEoIVIlakKLh4
-stage_openshift_host: https://localhost:8443
-stage_jdg_project: stage
+stage_openshift_token: <<token>>
+stage_openshift_host: https://openshift-master.openwhisk.sysdeseng.com
+stage_jdg_project: jdg-stage
 
-azure_openshift_token: J5tSoXXl6c_4n5jHg__H_JzitlC-horEoIVIlakKLh4
-azure_openshift_host: https://localhost:8443
-azure_jdg_project: azure
+azure_openshift_token: <<token>>
+azure_openshift_host: https://openshift-master.azr.sysdeseng.com:8443
+azure_jdg_project: jdg
 
-aws_openshift_token: J5tSoXXl6c_4n5jHg__H_JzitlC-horEoIVIlakKLh4
-aws_openshift_host: https://localhost:8443
-aws_jdg_project: aws
+aws_openshift_token: <<token>>
+aws_openshift_host: https://openshift-master.openwhisk.sysdeseng.com
+aws_jdg_project: jdg
