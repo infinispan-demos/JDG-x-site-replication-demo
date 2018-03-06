@@ -1,7 +1,7 @@
 ---
 
 - name: Log into proper cluster
-  shell: oc login https://{{stage_openshift_host}}:8443 --token={{stage_openshift_token}} --insecure-skip-tls-verify=true
+  shell: oc login {{stage_openshift_host}} --token={{stage_openshift_token}} --insecure-skip-tls-verify=true
 
 - name: Switch to proper project
   shell: oc project {{stage_jdg_project}}
@@ -14,7 +14,7 @@
   register: _stage_lb_ip
 
 - name: Log into proper cluster
-  shell: oc login https://{{aws_openshift_host}}:8443 --token={{aws_openshift_token}} --insecure-skip-tls-verify=true
+  shell: oc login {{aws_openshift_host}} --token={{aws_openshift_token}} --insecure-skip-tls-verify=true
 
 - name: Switch to proper project
   shell: oc project {{aws_jdg_project}}
@@ -27,7 +27,7 @@
   register: _aws_lb_ip
 
 - name: Log into proper cluster
-  shell: oc login https://{{azure_openshift_host}}:8443 --token={{azure_openshift_token}} --insecure-skip-tls-verify=true
+  shell: oc login {{azure_openshift_host}} --token={{azure_openshift_token}} --insecure-skip-tls-verify=true
 
 - name: Switch to proper project
   shell: oc project {{azure_jdg_project}}
