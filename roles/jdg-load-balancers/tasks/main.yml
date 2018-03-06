@@ -10,7 +10,7 @@
 - debug:
     msg: "Using host {{ openshift_host }} with token {{ openshift_token }} for creating project {{ jdg_project }}"
 
-- include: lbs.yml
+- include: load-balancers.yml
 
 - name: Setting values to AWS cluster
   set_fact:
@@ -22,7 +22,7 @@
 - debug:
     msg: "Using host {{ openshift_host }} with token {{ openshift_token }} for creating project {{ jdg_project }}"
 
-- include: lbs.yml
+- include: load-balancers.yml
 
 - name: Setting values to Azure cluster
   set_fact:
@@ -34,8 +34,4 @@
 - debug:
     msg: "Using host {{ openshift_host }} with token {{ openshift_token }} for creating project {{ jdg_project }}"
 
-- include: lbs.yml
-- include: secrets.yml
-
-
-
+- include: load-balancers.yml

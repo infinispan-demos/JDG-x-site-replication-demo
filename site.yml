@@ -4,5 +4,9 @@
   gather_facts: no
 
   roles:
+    - jdg-remove-leftovers
+    - jdg-create-projects
     - jdg-load-balancers
+    - jdg-secrets
     - jdg-templates
+    - jdg-app

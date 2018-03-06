@@ -1,0 +1,16 @@
+---
+
+- name: Log into proper cluster
+  shell: oc login https://{{openshift_host}}:8443 --token={{openshift_token}} --insecure-skip-tls-verify=true
+
+- name: Switch to proper project
+  shell: oc project {{jdg_project}}
+  ignore_errors: yes
+
+- name: Remove app (if exists)
+  shell: oc delete all,secrets,templates,configmaps,daemonsets,pvc,pv --selector=template=jdg
+  ignore_errors: yes
+
+
+
+

@@ -3,9 +3,8 @@
 - name: Log into proper cluster
   shell: oc login https://{{openshift_host}}:8443 --token={{openshift_token}} --insecure-skip-tls-verify=true
 
-- name: Create stage project
-  shell: oc new-project {{jdg_project}}
-  ignore_errors: yes
+- name: Switch to proper project
+  shell: oc project {{jdg_project}}
 
 - name: Delete x-site replication service if it exists
   shell: oc delete svc/jdg-app-x-site
