@@ -9,7 +9,13 @@
 - name: Get Stage LB address
   shell: |
     OPEN_CURLY="{"
-    external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.ip}}$OPEN_CURLY{end}}")
+    external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.hostname}}$OPEN_CURLY{end}}")
+    while [ x"$external_ip" == "x" ] || [ "<no value>" == "$external_ip" ]; do
+       external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.hostname}}$OPEN_CURLY{end}}")
+       if [ "<no value>" == "$external_ip" ]; then
+          external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.ip}}$OPEN_CURLY{end}}")
+       fi
+    done
     echo "$external_ip"
   register: _stage_lb_ip
 
@@ -22,7 +28,13 @@
 - name: Get AWS LB address
   shell: |
     OPEN_CURLY="{"
-    external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.ip}}$OPEN_CURLY{end}}")
+    external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.hostname}}$OPEN_CURLY{end}}")
+    while [ x"$external_ip" == "x" ] || [ "<no value>" == "$external_ip" ]; do
+       external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.hostname}}$OPEN_CURLY{end}}")
+       if [ "<no value>" == "$external_ip" ]; then
+          external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.ip}}$OPEN_CURLY{end}}")
+       fi
+    done
     echo "$external_ip"
   register: _aws_lb_ip
 
@@ -35,7 +47,13 @@
 - name: Get Azure LB address
   shell: |
     OPEN_CURLY="{"
-    external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.ip}}$OPEN_CURLY{end}}")
+    external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.hostname}}$OPEN_CURLY{end}}")
+    while [ x"$external_ip" == "x" ] || [ "<no value>" == "$external_ip" ]; do
+       external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.hostname}}$OPEN_CURLY{end}}")
+       if [ "<no value>" == "$external_ip" ]; then
+          external_ip=$(oc get svc/jdg-app-x-site --template="$OPEN_CURLY{range .status.loadBalancer.ingress}}$OPEN_CURLY{.ip}}$OPEN_CURLY{end}}")
+       fi
+    done
     echo "$external_ip"
   register: _azure_lb_ip
 

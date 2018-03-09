@@ -4,6 +4,10 @@
   "metadata": {
     "name": "jdg-app-x-site",
     "annotations": {
+      "service.beta.kubernetes.io/azure-load-balancer-internal": "true",
+      "service.beta.kubernetes.io/openstack-internal-load-balancer": "true",
+      "service.beta.kubernetes.io/aws-load-balancer-internal": "0.0.0.0/0",
+      "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "tcp",
       "description": "x-site replication endpoint"
     }
   },
